@@ -5,7 +5,7 @@ import com.pf8x.exception.Pf8xIllegalStateException;
 import java.util.HashMap;
 
 public class DoublyLinkedListQueue<T> implements SimpleQueue<T> {
-    private final int capacity;
+    private final int maxSize;
 
     private class Node {
         T val;
@@ -18,14 +18,14 @@ public class DoublyLinkedListQueue<T> implements SimpleQueue<T> {
     private Node tail;
     private int size;
 
-    public DoublyLinkedListQueue(int capacity) {
-        this.capacity = capacity;
-        hashMap = new HashMap<>(capacity);
+    public DoublyLinkedListQueue(int maxSize) {
+        this.maxSize = maxSize;
+        hashMap = new HashMap<>(maxSize);
     }
 
     @Override
     public synchronized void enqueue(T e) {
-        if(size >= capacity) throw new Pf8xIllegalStateException("DoublyLinkedListQueue reaches maximum!");
+        if(size >= maxSize) throw new Pf8xIllegalStateException("DoublyLinkedListQueue reaches maximum!");
         Node node = hashMap.get(e);
         node.val = e;
         if(head == null) head = tail = node;
@@ -78,6 +78,7 @@ public class DoublyLinkedListQueue<T> implements SimpleQueue<T> {
     }
 
     public synchronized void put(T e) {
+        if(hashMap.size() >= maxSize) throw new Pf8xIllegalStateException("DoublyLinkedListQueue reaches maximum!");
         Node node = new Node();
         node.val = e;
 

@@ -58,7 +58,7 @@ public class Pf8xDataSourceConfig {
         /**
          * a soft limit on number of pending connection, when this limit is reached, exception may thrown to throttle.
          * this should be set with respect to max total number of threads you estimate that may try to get connection.
-         * must be set > 0
+         * must be set > 0 and should be set as small as possible
          * default -1
          * @param pendingConnectionSoftLimit
          * @return
