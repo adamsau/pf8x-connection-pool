@@ -3,7 +3,7 @@ a hyper fast connection pool for high frequency transaction in Java!
 
 This connection pool provides super performance on low latency, high frequency transaction and also maximize throughput!
 
-It completely beats HikariCP by over 80%+ where CAS fails to deliver under high contention, and also beats HikariCP under normal situation!
+It completely beats HikariCP by over **80%+** where CAS fails to deliver under high contention, and also beats HikariCP under normal situation!
 
 It use fine grained synchronised methods to minimize overhead and provides certain fairness
 
