@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class ConnectionPoolTest {
     private BlockingConnectionPool cp;
     private final int MAX_SIZE = 10;
-    private final int PENDING_CONNECTION_SOFT_LIMIT = 32;
+    private final int PENDING_CONNECTION_SOFT_LIMIT = 64;
     private final String URL = "jdbc:postgresql://127.0.0.1:5432/bench?user=bench&password=123456";
     private DataSource DATASOURCE;
     private final int PRIORITY_THRESHOLD = 16;

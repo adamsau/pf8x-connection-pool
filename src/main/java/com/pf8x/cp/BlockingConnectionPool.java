@@ -1,8 +1,8 @@
 package com.pf8x.cp;
 
 import com.google.common.reflect.AbstractInvocationHandler;
+import com.pf8x.collection.ArrayQueue;
 import com.pf8x.collection.DoublyLinkedListQueue;
-import com.pf8x.collection.LinkedListQueue;
 import com.pf8x.collection.SimpleQueue;
 import com.pf8x.connection.Pf8xConnection;
 import com.pf8x.exception.Pf8xIllegalStateException;
@@ -29,8 +29,8 @@ public class BlockingConnectionPool extends ConnectionPool {
      */
     private final Pf8xConnection[] connectionsRef;
     private final DoublyLinkedListQueue<Pf8xConnection> connectionQueue = new DoublyLinkedListQueue<>(MAX_SIZE);
-    private final SimpleQueue<PendingConnectionWrapper> pendingConnectionWrapperQueue = new LinkedListQueue<>(PENDING_CONNECTION_SOFT_LIMIT);
-    private final SimpleQueue<PendingConnectionWrapper> priorityPendingConnectionWrapperQueue = new LinkedListQueue<>(PENDING_CONNECTION_SOFT_LIMIT);
+    private final SimpleQueue<PendingConnectionWrapper> pendingConnectionWrapperQueue = new ArrayQueue<>(PENDING_CONNECTION_SOFT_LIMIT);
+    private final SimpleQueue<PendingConnectionWrapper> priorityPendingConnectionWrapperQueue = new ArrayQueue<>(PENDING_CONNECTION_SOFT_LIMIT);
     private final ThreadPoolExecutor executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
     private AtomicBoolean isShutdown = new AtomicBoolean(false);
     private ThreadLocal<Pf8xConnection> lastConnectionOfThisThread = new ThreadLocal<>();

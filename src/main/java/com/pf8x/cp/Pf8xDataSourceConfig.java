@@ -1,5 +1,7 @@
 package com.pf8x.cp;
 
+import com.pf8x.exception.Pf8xIllegalStateException;
+
 import javax.sql.DataSource;
 
 public class Pf8xDataSourceConfig {
@@ -36,6 +38,8 @@ public class Pf8xDataSourceConfig {
         private Pf8xDataSourceConfig pf8xDataSourceConfig = new Pf8xDataSourceConfig();
 
         public Pf8xDataSourceConfig build() {
+            if(pf8xDataSourceConfig.pendingConnectionSoftLimit <= 0) throw new Pf8xIllegalStateException("pendingConnectionSoftLimit should be > 0.");
+
             return pf8xDataSourceConfig;
         }
 
@@ -52,9 +56,9 @@ public class Pf8xDataSourceConfig {
         }
 
         /**
-         * a soft limit on number of pending connection, when this limit is reached, exception may thrown to throttle
-         * -1 indicates no limit
-         * this should be set with respect to total number of threads
+         * a soft limit on number of pending connection, when this limit is reached, exception may thrown to throttle.
+         * this should be set with respect to max total number of threads you estimate that may try to get connection.
+         * must be set > 0
          * default -1
          * @param pendingConnectionSoftLimit
          * @return
